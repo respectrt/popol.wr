@@ -3,40 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 검색엔진 노출을 막는 noindex 태그 -->
-    <meta name="robots" content="noindex, nofollow">
-    <title>홍길동 | 샘플 이력서</title>
+    <title>IT Infrastructure & Automation Portfolio</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; background-color: #f4f4f4; color: #333; }
-        .container { max-width: 800px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
-        h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
-        h2 { color: #333; margin-top: 20px; }
-        .contact { font-size: 0.9em; color: #666; }
-        ul { padding-left: 20px; }
+        /* 기본 스타일 초기화 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 5:5 화면 분할 레이아웃 (PC) */
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        /* 왼쪽/오른쪽 메인 영역 스타일 */
+        .panel {
+            flex: 1;
+            height: 100%;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        /* 왼쪽 경력/이력서 영역 */
+        .left-panel {
+            background-color: #ffffff;
+            border-right: 2px solid #e9ecef;
+        }
+
+        /* 오른쪽 포트폴리오/트러블슈팅 영역 */
+        .right-panel {
+            background-color: #f8f9fa;
+        }
+
+        /* 프로필 헤더 */
+        .profile-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #2b6cb0;
+        }
+
+        .profile-header h1 {
+            font-size: 1.8rem;
+            color: #1a202c;
+        }
+
+        .profile-header p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        /* 메뉴 목록 스타일 */
+        .menu-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            margin-bottom: 12px;
+            padding: 16px;
+            background-color: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #3182ce;
+            background-color: #ebf8ff;
+            transform: translateX(4px);
+        }
+
+        .menu-item.active {
+            border-left: 5px solid #3182ce;
+            background-color: #ebf8ff;
+            font-weight: bold;
+        }
+
+        .menu-item h3 {
+            font-size: 1.05rem;
+            color: #2d3748;
+        }
+
+        .menu-item p {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 4px;
+        }
+
+        /* 카드 컴포넌트 (오른쪽 출력용) */
+        .content-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: none; /* 기본 숨김 */
+        }
+
+        .content-card.active {
+            display: block; /* 선택된 항목만 표시 */
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .content-card h2 {
+            font-size: 1.4rem;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+        }
+
+        .content-card p {
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+
+        .tech-stack-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .tech-badge {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* モバイル (스마트폰) 반응형 스타일 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+            }
+
+            .panel {
+                height: auto;
+                padding: 20px;
+            }
+
+            .left-panel {
+                border-right: none;
+                border-bottom: 2px solid #e9ecef;
+            }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>홍길동 (Gil-Dong Hong)</h1>
-        <p class="contact">이메일: sample_user@example.com | 분야: 전산 IT 및 시스템 관리</p>
-        <hr>
-        
-        <h2>기술 스택 및 역량</h2>
-        <ul>
-            <li>시스템 관리: 사내 인프라 관리, 방화벽 설정 및 보안 관리</li>
-            <li>프로그래밍: Python, 기초 웹 개발 (HTML/CSS)</li>
-            <li>통신/자동화: 모니터링 시스템 스크립트 작성 및 툴 활용</li>
-        </ul>
+        <!-- 왼쪽 영역: 프로필 & 이력서/경력 목록 -->
+        <div class="panel left-panel">
+            <div class="profile-header">
+                <h1>IT 인프라 & 자동화 포트폴리오</h1>
+                <p>1인 전산 인프라 운영 및 Python 기반 자동화 솔루션 구축 경험</p>
+            </div>
 
-        <h2>주요 프로젝트 (샘플)</h2>
-        <ul>
-            <li><strong>사내 모니터링 툴 제작:</strong> Python 기반 시스템 상태 감시 프로그램 구축</li>
-            <li><strong>인프라 개선 작업:</strong> 네트워크 및 보안 가이드라인 준수 상태 점검</li>
-        </ul>
+            <h2>📋 핵심 이력 및 트러블슈팅 목록</h2>
+            <p style="font-size: 0.85rem; color: #a0aec0; margin-bottom: 15px;">
+                * 각 항목을 클릭하면 오른쪽에 상세 실무 사례가 표시됩니다.
+            </p>
 
-        <p style="margin-top: 30px; color: #888; font-size: 0.8em; text-align: center;">
-            ※ 본 페이지는 GitHub Pages 배포 테스트용 샘플 페이지입니다.
-        </p>
+            <ul class="menu-list">
+                <li class="menu-item active" onclick="showContent('welcome')">
+                    <h3>👋 인사말 & 역량 요약</h3>
+                    <p>인프라 관리와 개발 융합형 인재로서의 핵심 경쟁력</p>
+                </li>
+                <li class="menu-item" onclick="showContent('trouble1')">
+                    <h3>🛡️ 기업망 인프라 & 방화벽/VPN 구축 사례</h3>
+                    <p>L3 스위치, VPN 터널링, AP 및 지사망 네트워크 안정화 경험</p>
+                </li>
+                <li class="menu-item" onclick="showContent('trouble2')">
+                    <h3>🐍 Python 기반 모니터링 & 통신 프로그램</h3>
+                    <p>오차범위 자동 제어 및 실시간 비동기 알럿 시스템 구현</p>
+                </li>
+                <li class="menu-item" onclick="showContent('trouble3')">
+                    <h3>📂 자산 관리 & 업무 효율화 프로그램</h3>
+                    <p>사내 전산 자산 및 시스템 운영 수작업 자동화 프로젝트</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 오른쪽 영역: 동적 포트폴리오 상세 내용 -->
+        <div class="panel right-panel">
+            
+            <!-- 초기 화면 (Welcome Card) -->
+            <div id="welcome" class="content-card active">
+                <span class="card-tag">OVERVIEW</span>
+                <h2>시스템을 굴려본 살아있는 실무형 인재</h2>
+                <p>왼쪽 메뉴의 각 항목을 클릭하시면 현업에서 직접 경험하고 해결했던 <strong>네트워크 구축, 트러블슈팅, 파이썬 자동화 사례</strong>의 상세 내용을 확인하실 수 있습니다.</p>
+                <div class="tech-stack-list">
+                    <span class="tech-badge">Network (L3/VPN)</span>
+                    <span class="tech-badge">Firewall</span>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">API Integration</span>
+                    <span class="tech-badge">System Admin</span>
+                </div>
+            </div>
+
+            <!-- 항목 1 상세 내용 -->
+            <div id="trouble1" class="content-card">
+                <span class="card-tag">NETWORK & SECURITY</span>
+                <h2>기업망 방화벽 - VPN 터널 - 지사망 구축 & 안정화</h2>
+                <p><strong>[문제 상황]</strong> 본사-지사 간 데이터 통신 불안정 및 특정 방화벽 인바운드 트래픽 병목 현상 발생.</p>
+                <p><strong>[해결 과정]</strong> L3 스위치 라우팅 경로 재설정 및 방화벽 간 IPsec VPN 터널링 재구성으로 세션 단절 문제 99% 해결.</p>
+                <div class="tech-stack-list">
+                    <span class="tech-badge">Firewall</span>
+                    <span class="tech-badge">VPN Tunnel</span>
+                    <span class="tech-badge">L3 Routing</span>
+                </div>
+            </div>
+
+            <!-- 항목 2 상세 내용 -->
+            <div id="trouble2" class="content-card">
+                <span class="card-tag">PYTHON AUTOMATION</span>
+                <h2>듀얼패널 데이터 통신 & 실시간 알럿 모니터링</h2>
+                <p><strong>[개요]</strong> 현장 장비 통신 데이터 수집 및 오차 범위(±0.05) 제어를 위한 파이썬 프로그램 개발.</p>
+                <p><strong>[성과]</strong> 수작업 검수 과정을 자동화하고 비동기 알럿을 통해 문제 발생 시 즉각 대처 가능한 환경 구현.</p>
+                <div class="tech-stack-list">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">API</span>
+                    <span class="tech-badge">Data Monitoring</span>
+                </div>
+            </div>
+
+            <!-- 항목 3 상세 내용 -->
+            <div id="trouble3" class="content-card">
+                <span class="card-tag">ASSET MANAGEMENT</span>
+                <h2>사내 전산 자산 및 시스템 통합 관리 툴</h2>
+                <p><strong>[개요]</strong> 산재되어 있던 사내 HW/SW 자산 수량을 파이썬 기반 데이터 툴로 통합 관리.</p>
+                <p><strong>[성과]</strong> 1인 전산 관점에서의 라이선스 위반 리스크 차단 및 전산 자산 관리 이력 투명화.</p>
+                <div class="tech-stack-list">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">GUI Application</span>
+                    <span class="tech-badge">Asset Control</span>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+    <!-- 메뉴 클릭 시 오른쪽 화면 전환 자바스크립트 -->
+    <script>
+        function showContent(contentId) {
+            // 모든 카드 숨기기
+            const cards = document.querySelectorAll('.content-card');
+            cards.forEach(card => card.classList.remove('active'));
+
+            // 모든 메뉴의 활성화(blue) 상태 해제
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => item.classList.remove('active'));
+
+            // 선택된 카드 및 메뉴 활성화
+            document.getElementById(contentId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>
