@@ -18,130 +18,154 @@
             line-height: 1.6;
         }
 
-        /* 전체 5:5 좌우 분할 컨테이너 (PC 기준) */
+        /* 5:5 레이아웃 */
         .main-container {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
             width: 100vw;
+            overflow: hidden;
         }
 
-        /* 좌우 각각의 메인 패널 (50%씩 차지) */
         .panel {
             flex: 1;
-            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
             overflow-y: auto;
         }
 
-        /* 왼쪽 패널: 일반 (이력서/자기소개 등) */
+        /* 패널 구별 색상 */
         .left-panel {
             background-color: #ffffff;
             border-right: 2px solid #e2e8f0;
         }
 
-        /* 오른쪽 패널: 포트폴리오 (트러블슈팅/프로젝트 등) */
         .right-panel {
             background-color: #f8fafc;
         }
 
-        /* 패널 대분류 헤더 (클릭 시 하위 중분류 토글) */
-        .panel-header {
-            background: linear-gradient(135deg, #2b6cb0, #3182ce);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-bottom: 20px;
-        }
-
-        .right-panel .panel-header {
-            background: linear-gradient(135deg, #2d3748, #4a5568);
-        }
-
-        .panel-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .panel-header h2 {
+        .panel-title {
             font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3182ce;
+            color: #1a202c;
         }
 
-        .panel-header p {
-            font-size: 0.9rem;
-            opacity: 0.9;
+        .right-panel .panel-title {
+            border-bottom-color: #2d3748;
         }
 
-        /* 하위 중분류 및 상세 내용 컨테이너 (초기엔 숨김 또는 접힘) */
-        .sub-content-group {
-            display: none; /* 기본 숨김, 대분류 클릭 시 열림 */
-            margin-top: 15px;
-            animation: fadeIn 0.3s ease-in-out;
+        /* 중분류 탭 메뉴 (Tab) */
+        .tab-menu {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        .sub-content-group.active {
-            display: block;
+        .tab-btn {
+            padding: 8px 16px;
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        /* 중분류 카드 아이템 */
-        .sub-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: border-color 0.2s;
+        .tab-btn:hover {
+            background-color: #e2e8f0;
         }
 
-        .sub-card:hover {
+        .left-panel .tab-btn.active {
+            background-color: #3182ce;
+            color: #ffffff;
             border-color: #3182ce;
         }
 
-        .sub-card h3 {
-            font-size: 1.1rem;
-            color: #2b6cb0;
-            margin-bottom: 8px;
+        .right-panel .tab-btn.active {
+            background-color: #2d3748;
+            color: #ffffff;
+            border-color: #2d3748;
         }
 
-        .right-panel .sub-card h3 {
+        /* 상세 데이터 카드 컨테이너 */
+        .content-area {
+            flex: 1;
+        }
+
+        .detail-card {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .detail-card.active {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .right-panel .detail-card {
+            background: #ffffff;
+        }
+
+        .detail-card h3 {
+            font-size: 1.2rem;
+            color: #2b6cb0;
+            margin-bottom: 12px;
+        }
+
+        .right-panel .detail-card h3 {
             color: #2d3748;
         }
 
-        .sub-card p {
-            font-size: 0.9rem;
+        .detail-card p {
+            font-size: 0.93rem;
             color: #4a5568;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        /* 태그 스타일 */
+        .tag-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
         .tag {
-            display: inline-block;
             background-color: #edf2f7;
             color: #4a5568;
             font-size: 0.75rem;
-            padding: 3px 8px;
+            padding: 4px 8px;
             border-radius: 4px;
             font-weight: 600;
-            margin-right: 5px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 모바일 반응형 (화면이 좁아지면 위아래로 배치) */
+        /* 반응형 모바일 구조 */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
                 height: auto;
+                overflow: visible;
             }
+
             .panel {
+                height: auto;
                 padding: 20px;
             }
+
             .left-panel {
                 border-right: none;
                 border-bottom: 2px solid #e2e8f0;
@@ -153,88 +177,114 @@
 
     <div class="main-container">
 
-        <!-- [왼쪽 영역] 일반 (이력서, 자소서, 기본 스펙) -->
+        <!-- [좌측 영역] 일반 이력 (General) -->
         <div class="panel left-panel">
-            <!-- 대분류 버튼 -->
-            <div class="panel-header" onclick="toggleSection('left-sub')">
-                <h2>📋 [일반] 이력서 및 커리어 요약</h2>
-                <p>클릭하여 상세 경력, 자격사항, 자기소개 보기 ▼</p>
+            <div class="panel-title">📋 General (이력 및 기본스펙)</div>
+
+            <!-- 중분류 탭 -->
+            <div class="tab-menu">
+                <button class="tab-btn left-tab active" onclick="switchTab('left', 'gen-1', this)">인사말 & 역량</button>
+                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-2', this)">자격증 & 스펙</button>
+                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-3', this)">경력 기술서</button>
             </div>
 
-            <!-- 하위 중분류 내용 (클릭 시 펼쳐짐) -->
-            <div id="left-sub" class="sub-content-group active">
-                
-                <div class="sub-card">
-                    <h3>👤 기본 프로필 및 핵심 역량</h3>
-                    <p>1인 전산 IT 운영자로서 인프라 방어와 자동화 개발을 아우르는 융합형 역량 소개</p>
-                    <span class="tag">System Admin</span>
-                    <span class="tag">IT Infrastructure</span>
+            <!-- 상세 데이터 -->
+            <div class="content-area">
+                <div id="gen-1" class="detail-card left-card active">
+                    <h3>👋 1인 전산 인프라 & 개발 융합형 인재</h3>
+                    <p>사내 모든 네트워크, 방화벽, 서버 시스템을 전담 관리하는 1인 전산 관리자로서, 현장 인프라의 안정적 방어와 파이썬 기반 업무 자동화를 동시에 수행해 온 커리어를 소개합니다.</p>
+                    <div class="tag-group">
+                        <span class="tag">System Admin</span>
+                        <span class="tag">Automation</span>
+                    </div>
                 </div>
 
-                <div class="sub-card">
-                    <h3>📜 보유 자격 및 스펙</h3>
-                    <p>• 정보처리기사 (필수 필터링 방어)<br>• 한국사 능력검정 1급</p>
-                    <span class="tag">Certified</span>
+                <div id="gen-2" class="detail-card left-card">
+                    <h3>📜 보유 자격 및 검증된 스펙</h3>
+                    <p>• <strong>정보처리기사:</strong> 컴퓨터공학 및 공채 서류 검증 방어용 필수 자격</p>
+                    <p>• <strong>한국사능력검정 1급:</strong> 대기업/공기업 기본 스펙 필터링 완전 충족</p>
+                    <div class="tag-group">
+                        <span class="tag">Certified</span>
+                        <span class="tag">Qualification</span>
+                    </div>
                 </div>
 
-                <div class="sub-card">
-                    <h3>💼 주요 경력 사항 (1인 전산)</h3>
-                    <p>사내 네트워크 아키텍처(L3, 방화벽, VPN) 총괄 관리 및 외부 벤더사 커뮤니케이션 경력</p>
-                    <span class="tag">Enterprise Net</span>
+                <div id="gen-3" class="detail-card left-card">
+                    <h3>💼 1인 전산 주요 경력 세부 요약</h3>
+                    <p>• 기업망 L3, 방화벽 규칙 구성, VPN 터널링, AP 유지보수 총괄</p>
+                    <p>• 사내 IT 자산 리스크 관리 및 외부 유지보수 벤더사 소통 단창 역할</p>
+                    <div class="tag-group">
+                        <span class="tag">Network Core</span>
+                        <span class="tag">Vendor Management</span>
+                    </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- [오른쪽 영역] 포트폴리오 (트러블슈팅, 자동화 사례) -->
+        <!-- [우측 영역] 실전 포트폴리오 (Portfolio) -->
         <div class="panel right-panel">
-            <!-- 대분류 버튼 -->
-            <div class="panel-header" onclick="toggleSection('right-sub')">
-                <h2>🚀 [포트폴리오] 트러블슈팅 & 실전 사례</h2>
-                <p>클릭하여 네트워크 구축 및 파이썬 자동화 툴 보기 ▼</p>
+            <div class="panel-title">🚀 Portfolio (트러블슈팅 & 개발)</div>
+
+            <!-- 중분류 탭 -->
+            <div class="tab-menu">
+                <button class="tab-btn right-tab active" onclick="switchTab('right', 'port-1', this)">네트워크/방화벽</button>
+                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-2', this)">Python 자동화</button>
+                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-3', this)">IT 자산/MES</button>
             </div>
 
-            <!-- 하위 중분류 내용 (클릭 시 펼쳐짐) -->
-            <div id="right-sub" class="sub-content-group active">
-                
-                <div class="sub-card">
-                    <h3>🛡️ 기업망 방화벽 - VPN 터널 구축</h3>
-                    <p>지사망과 본사 간 세션 단절 및 인바운드 병목 현상을 L3 라우팅 재설정으로 해결한 사례</p>
-                    <span class="tag">Firewall</span>
-                    <span class="tag">VPN Tunnel</span>
+            <!-- 상세 데이터 -->
+            <div class="content-area">
+                <div id="port-1" class="detail-card right-card active">
+                    <h3>🛡️ 본사-지사 간 방화벽 & VPN 터널링 재설계</h3>
+                    <p><strong>[문제]</strong> 지사 데이터 통신 중 세션 단절 및 인바운드 병목 현상 발생</p>
+                    <p><strong>[해결]</strong> L3 스위치 라우팅 테이블 및 VPN IPsec 터널링을 재구성하여 패킷 손실율 0% 안정화 달성</p>
+                    <div class="tag-group">
+                        <span class="tag">Firewall</span>
+                        <span class="tag">VPN Tunnel</span>
+                        <span class="tag">L3 Switch</span>
+                    </div>
                 </div>
 
-                <div class="sub-card">
-                    <h3>🐍 파이썬 듀얼패널 통신 프로그램</h3>
-                    <p>±0.05 오차 범위 제어 및 실시간 비동기 알럿을 통해 현장 장비 모니터링 자동화 구현</p>
-                    <span class="tag">Python</span>
-                    <span class="tag">API Integration</span>
+                <div id="port-2" class="detail-card right-card">
+                    <h3>🐍 파이썬 듀얼패널 통신 & 비동기 알럿 프로그램</h3>
+                    <p><strong>[개요]</strong> 현장 모니터링 데이터의 오차 범위(±0.05) 수동 검수를 자동화하기 위한 툴 개발</p>
+                    <p><strong>[성과]</strong> 데이터 실시간 통신 및 비동기 알럿을 적용해 이상 발생 시 즉시 대응 프로세스 확립</p>
+                    <div class="tag-group">
+                        <span class="tag">Python</span>
+                        <span class="tag">API</span>
+                        <span class="tag">Async Alert</span>
+                    </div>
                 </div>
 
-                <div class="sub-card">
-                    <h3>📂 사내 전산 자산 통합 관리 툴</h3>
-                    <p>HW/SW 자산 라이선스 리스크를 예방하고 수작업 관리 프로세스를 전산화한 툴 개발</p>
-                    <span class="tag">Automation</span>
-                    <span class="tag">Data Tool</span>
+                <div id="port-3" class="detail-card right-card">
+                    <h3>📂 사내 전산 자산 및 MES 연동 툴 구축</h3>
+                    <p><strong>[개요]</strong> 파편화된 사내 전산 HW/SW 자산을 데이터화하여 체계적으로 추적 관리</p>
+                    <p><strong>[성과]</strong> 기업 라이선스 정품 준수 리스크 차단 및 1인 전산 자산 관리 이력 투명화</p>
+                    <div class="tag-group">
+                        <span class="tag">Asset Management</span>
+                        <span class="tag">System Control</span>
+                    </div>
                 </div>
-
             </div>
         </div>
 
     </div>
 
-    <!-- 대분류 클릭 시 하위 내용 토글(열고 닫기) 자바스크립트 -->
+    <!-- 탭 전환 자바스크립트 로직 -->
     <script>
-        function toggleSection(sectionId) {
-            const target = document.getElementById(sectionId);
-            // 현재 열려있으면 닫고, 닫혀있으면 염
-            if (target.classList.contains('active')) {
-                target.classList.remove('active');
-            } else {
-                target.classList.add('active');
-            }
+        function switchTab(side, cardId, btnElement) {
+            // 해당 패널 내의 모든 카드 숨기기
+            const cards = document.querySelectorAll(`.${side}-card`);
+            cards.forEach(card => card.classList.remove('active'));
+
+            // 해당 패널 내의 모든 탭 버튼 비활성화
+            const buttons = document.querySelectorAll(`.${side}-tab`);
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // 선택한 카드 및 탭 활성화
+            document.getElementById(cardId).classList.add('active');
+            btnElement.classList.add('active');
         }
     </script>
-
 </body>
 </html>
