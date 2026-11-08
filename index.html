@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Infrastructure & MES Operations Portfolio | </title>
+    <title>IT Infrastructure & MES Operations Portfolio</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             background-color: #0f172a;
             color: #333;
             line-height: 1.6;
@@ -29,7 +29,7 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        /* 1단계: 인트로(표지) 화면 */
+        /* [1단계] 인트로 표지 */
         #intro-screen {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             display: flex;
@@ -54,17 +54,10 @@
         }
 
         #intro-screen h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: #f8fafc;
             margin-bottom: 15px;
             font-weight: 800;
-        }
-
-        #intro-screen h2 {
-            font-size: 1.25rem;
-            color: #38bdf8;
-            margin-bottom: 20px;
-            font-weight: 600;
         }
 
         #intro-screen p {
@@ -89,180 +82,212 @@
 
         .enter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.7);
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
         }
 
         .screen.hidden {
             opacity: 0;
             pointer-events: none;
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
-        /* 2단계: 본문 메인 컨테이너 (5:5 듀얼 패널) */
+        /* [2단계] 메인 듀얼 수직 스케치 레이아웃 */
         #main-screen {
             opacity: 0;
             pointer-events: none;
-            background-color: #f0f2f5;
+            background-color: #f8fafc;
             display: flex;
-            overflow: hidden;
         }
 
         #main-screen.active {
             opacity: 1;
             pointer-events: auto;
-            overflow: auto;
         }
 
-        .panel {
-            flex: 1;
+        /* 좌측: 세로 네비게이션 메뉴 (스케치 좌측 영역) */
+        .sidebar {
+            width: 320px;
+            background-color: #1e293b;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
-            padding: 30px;
+            padding: 24px;
+            border-right: 1px solid #334155;
             height: 100vh;
-            overflow-y: auto;
         }
 
-        .left-panel {
-            background-color: #ffffff;
-            border-right: 2px solid #e2e8f0;
+        .sidebar-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #334155;
         }
 
-        .right-panel {
-            background-color: #f8fafc;
-        }
-
-        .panel-title {
-            font-size: 1.4rem;
+        .sidebar-header h2 {
+            font-size: 1.25rem;
+            color: #38bdf8;
             font-weight: 700;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #3182ce;
-            color: #1a202c;
         }
 
-        .right-panel .panel-title {
-            border-bottom-color: #2d3748;
+        .sidebar-header p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .nav-item {
+            background-color: #334155;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 16px 20px;
+            color: #cbd5e1;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item .title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .nav-item .desc {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .nav-item:hover {
+            background-color: #475569;
+            transform: translateX(4px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-color: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-item.active .desc {
+            color: #e2e8f0;
         }
 
         .home-btn {
-            display: inline-block;
-            margin-bottom: 15px;
-            font-size: 0.8rem;
-            color: #718096;
-            background: #edf2f7;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
+            background: #334155;
+            color: #94a3b8;
             border: none;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .home-btn:hover {
-            background: #cbd5e0;
-            color: #2d3748;
-        }
-
-        .tab-menu {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 8px 12px;
-            background-color: #edf2f7;
-            border: 1px solid #cbd5e0;
+            padding: 10px;
             border-radius: 6px;
+            cursor: pointer;
             font-size: 0.82rem;
             font-weight: 600;
-            color: #4a5568;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background 0.2s;
+            margin-top: auto;
         }
 
-        .left-panel .tab-btn.active {
-            background-color: #3182ce;
+        .home-btn:hover {
+            background: #475569;
             color: #ffffff;
-            border-color: #3182ce;
         }
 
-        .right-panel .tab-btn.active {
-            background-color: #2d3748;
-            color: #ffffff;
-            border-color: #2d3748;
-        }
-
-        .content-area {
+        /* 우측: 상세 내용 연동 영역 (스케치 우측 영역) */
+        .content-display {
             flex: 1;
+            padding: 40px;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f8fafc;
         }
 
-        .detail-card {
+        .content-section {
             display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .info-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 24px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
-        .detail-card.active {
-            display: block;
-            animation: fadeIn 0.25s ease-in-out;
-        }
-
-        .detail-card h3 {
+        .info-card h3 {
             font-size: 1.15rem;
-            color: #2b6cb0;
+            color: #2563eb;
             margin-bottom: 12px;
-            border-left: 4px solid #3182ce;
-            padding-left: 8px;
         }
 
-        .right-panel .detail-card h3 {
-            color: #2d3748;
-            border-left-color: #2d3748;
+        .info-card p, .info-card li {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 10px;
+            line-height: 1.65;
         }
 
-        .detail-card p, .detail-card li {
-            font-size: 0.88rem;
-            color: #4a5568;
-            margin-bottom: 8px;
-        }
-
-        .detail-card ul {
-            padding-left: 18px;
-            margin-bottom: 12px;
+        .info-card ul {
+            padding-left: 20px;
         }
 
         .tag-group {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-            margin-top: 15px;
+            margin-top: 16px;
         }
 
         .tag {
-            background-color: #edf2f7;
-            color: #4a5568;
+            background-color: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
             font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-weight: 600;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 900px) {
             body { overflow: auto; }
-            #main-screen { height: auto; flex-direction: column; }
-            .panel { height: auto; padding: 20px; }
-            .left-panel { border-right: none; border-bottom: 2px solid #e2e8f0; }
-            #intro-screen h1 { font-size: 2rem; }
+            #main-screen { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; }
+            .content-display { height: auto; padding: 20px; }
         }
     </style>
 </head>
@@ -272,138 +297,155 @@
     <div id="intro-screen" class="screen">
         <span class="intro-badge">IT Infrastructure & MES Operations</span>
         <h1>현장의 목소리를 기술로 연결하는 엔지니어</h1>
-        <h2> 포트폴리오</h2>
-        <p> 제조 현장의 MES/SCM 운영부터 전사 네트워크·인프라 구축, 스마트공장 고도화 실무 PM, 그리고 생성형 AI 기반 트러블슈팅까지 — 중단 없는 제조 환경을 지탱해 온 전산 책임자의 실무 기록입니다.</p>
+        <p>제조 현장의 MES/SCM 운영부터 전사 네트워크·인프라 구축, 스마트공장 고도화 실무 PM, 그리고 생성형 AI 기반 트러블슈팅까지 — 중단 없는 제조 환경을 지탱해 온 전산 책임자의 실무 기록입니다.</p>
         <button class="enter-btn" onclick="enterPortfolio()">포트폴리오 입장하기 ➔</button>
     </div>
 
-    <!-- [2단계] 본문 메인 화면 (좌우 5:5 듀얼 패널) -->
+    <!-- [2단계] 수직 네비게이션 연동 메인 화면 -->
     <div id="main-screen" class="screen">
 
-        <!-- [좌측 영역] General (운영 역량 & 자격) -->
-        <div class="panel left-panel">
-            <button class="home-btn" onclick="goToIntro()">↺ 표지로 돌아가기</button>
-            <div class="panel-title">📋 General (운영 역량 & 스펙)</div>
-
-            <div class="tab-menu">
-                <button class="tab-btn left-tab active" onclick="switchTab('left', 'gen-1', this)">프로필 & 철학</button>
-                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-2', this)">MES & 인프라 운영</button>
-                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-3', this)">스마트공장 & 행정</button>
+        <!-- 좌측 세로 메뉴 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>IT & MES Operations</h2>
+                <p>전산 관리자 실무 역량 포트폴리오</p>
             </div>
 
-            <div class="content-area">
-                <!-- Gen Tab 1 -->
-                <div id="gen-1" class="detail-card left-card active">
-                    <h3>👋 Professional Identity & 철학</h3>
-                    <p><strong>"엔지니어링의 본질은 기술의 숙련도가 아닌, 그 기술로 비즈니스의 문제를 어떻게 해결(Solve)하고 가치를 창출(Value)하는가에 있습니다."</strong></p>
-                    <p style="margin-top: 10px;">• 제조업 사업장 전산 담당자로서 시스템 운영, 인프라 안정화, 현업 사용자 지원을 총괄합니다.</p>
-                    <p>• 단순 유지보수를 넘어 현장의 요구사항과 IT 시스템을 연결하는 <strong>'기술 가교'</strong> 역할을 수행하며, 가시적 성과를 만들어냅니다.</p>
-                    <div class="tag-group">
-                        <span class="tag">System Admin</span>
-                        <span class="tag">MES Operations</span>
-                        <span class="tag">Problem Solver</span>
-                    </div>
-                </div>
-
-                <!-- Gen Tab 2 -->
-                <div id="gen-2" class="detail-card left-card">
-                    <h3>⚙️ MES & 사내 IT 인프라 통합 관리</h3>
-                    <ul>
-                        <li><strong>MES/SCM 운영:</strong> 생산·품질·재고 등 전 공정 메뉴 운영 및 사용자 지원. 벤더사 대응과 함께 데이터 정합성 유지 총괄.</li>
-                        <li><strong>네트워크 및 방화벽:</strong> L2/L3 스위치, UTM 방화벽, AP, PoE 허브 등 사내 유무선 인프라 유지보수 및 보안 통제.</li>
-                        <li><strong>현장 자동화 HW 제어:</strong> 자동카운터(Zigbee), 바코드 장비, PDA, 자동검사설비 데이터 수집 환경 밀착 관리.</li>
-                        <li><strong>전산 자산 & 지원:</strong> 100대 이상의 단말(PC/OA) 및 서버 자산 관리, 소프트웨어 라이선스 컴플라이언스 준수.</li>
-                    </ul>
-                    <div class="tag-group">
-                        <span class="tag">FortiGate UTM</span>
-                        <span class="tag">Ruckus L3</span>
-                        <span class="tag">MSSQL Server</span>
-                        <span class="tag">HW Troubleshooting</span>
-                    </div>
-                </div>
-
-                <!-- Gen Tab 3 -->
-                <div id="gen-3" class="detail-card left-card">
-                    <h3>📜 자격증 및 스마트공장 행정 역량</h3>
-                    <ul>
-                        <li><strong>국가공인 자격:</strong> 정보처리기사(IT 전반 및 DB 엔지니어링 지식 검증), 한국사능력검정 1급(성실성 및 소양).</li>
-                        <li><strong>스마트공장 고도화 사업 PM:</strong> 도입기업 실무 담당자로서 현장 요구사항 조율, 공급업체 핸들링 및 사업 행정 지원 수행.</li>
-                        <li><strong>사업비 및 회계 감사 대응:</strong> 정부 지원사업의 사업비 사용내역 대조, 증빙자료 수집 및 회계법인 대응.</li>
-                        <li><strong>전사 고정비 절감:</strong> 대기업 상생 협력 지원사업을 유치하여 기숙사 리모델링 및 안전 인프라 확충 기여.</li>
-                    </ul>
-                    <div class="tag-group">
-                        <span class="tag">정보처리기사</span>
-                        <span class="tag">Smart Factory PM</span>
-                        <span class="tag">Audit Compliance</span>
-                    </div>
-                </div>
+            <div class="nav-menu">
+                <button class="nav-item active" onclick="showSection('sec-profile', this)">
+                    <span class="title">📋 프로필 & 철학</span>
+                    <span class="desc">Professional Identity 및 가치관</span>
+                </button>
+                <button class="nav-item" onclick="showSection('sec-infra', this)">
+                    <span class="title">⚙️ MES & 인프라 운영</span>
+                    <span class="desc">전사 인프라, 자산 및 컴플라이언스</span>
+                </button>
+                <button class="nav-item" onclick="showSection('sec-portfolio', this)">
+                    <span class="title">🚀 Portfolio (핵심 사례)</span>
+                    <span class="desc">데이터 검증, 네트워크, 이기종 연동, AI</span>
+                </button>
             </div>
+
+            <button class="home-btn" onclick="goToIntro()">↺ 인트로 표지로</button>
         </div>
 
-        <!-- [우측 영역] Portfolio (핵심 사례 & 프로젝트) -->
-        <div class="panel right-panel">
-            <div style="height: 27px; margin-bottom: 15px;"></div>
-            <div class="panel-title">🚀 Portfolio (핵심 프로젝트 & 트러블슈팅)</div>
+        <!-- 우측 콘텐츠 연동 영역 -->
+        <div class="content-display">
 
-            <div class="tab-menu">
-                <button class="tab-btn right-tab active" onclick="switchTab('right', 'port-1', this)">MES 데이터 검증</button>
-                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-2', this)">네트워크 아키텍처</button>
-                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-3', this)">이기종 장비 연동</button>
-                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-4', this)">AI & 자동화 R&D</button>
-            </div>
-
-            <div class="content-area">
-                <!-- Port Tab 1 -->
-                <div id="port-1" class="detail-card right-card active">
-                    <h3>💻 MES 데이터 무결성 확보 및 SELECT 검증</h3>
-                    <p><strong>[상황]</strong> 생산실적 연도 데이터 입력 오류로 특정 MES 메뉴에서 데이터 조회가 마비되는 시스템 에러 발생.</p>
-                    <p><strong>[조치]</strong> 느린 외부 벤더사 피드백을 기다리지 않고, 직접 관련 시스템 테이블을 추적하여 MSSQL SELECT 쿼리로 데이터를 조회 및 정밀 검증.</p>
-                    <p><strong>[성과]</strong> DB의 직접 수정(Update/Delete) 없이 안전한 조회 및 검증 범위 내에서 문제 데이터를 신속히 특정하여 데이터 무결성을 사수함.</p>
-                    <div class="tag-group">
-                        <span class="tag">MSSQL</span>
-                        <span class="tag">Data Integrity</span>
-                        <span class="tag">SELECT Query Debugging</span>
-                    </div>
+            <!-- 1. 프로필 & 철학 -->
+            <div id="sec-profile" class="content-section active">
+                <div class="section-header">
+                    <h2>📋 프로필 & 엔지니어링 철학</h2>
                 </div>
-
-                <!-- Port Tab 2 -->
-                <div id="port-2" class="detail-card right-card">
-                    <h3>🛡️ 전사 네트워크 재설계 및 인프라 체질 개선</h3>
-                    <p><strong>[주차관제 VPN 연동]</strong> A·B 공장 간 VPN 주차관제 연동 시 벤더사 오판을 규명. FortiGate 방화벽 및 Ruckus L3 구조 분석 후 신규 VLAN 세그먼트를 신설하여 타 시스템 간섭 없이 통신 정상화.</p>
-                    <p><strong>[무선 카운터 유선 전환]</strong> Wi-Fi 기반 자동 카운터의 빈번한 끊김과 데이터 누락을 해결하기 위해 현장 물리 계층 점검 후 유선 LAN 망으로 전면 체질 개선하여 가동률 극대화.</p>
-                    <div class="tag-group">
-                        <span class="tag">FortiGate UTM</span>
-                        <span class="tag">Ruckus L3 VLAN</span>
-                        <span class="tag">Physical Layer Redesign</span>
-                    </div>
-                </div>
-
-                <!-- Port Tab 3 -->
-                <div id="port-3" class="detail-card right-card">
-                    <h3>🤝 3자 실무 협의체 주관: 이기종 장비 연동</h3>
-                    <p><strong>[상황]</strong> 신규 검사공정 추가 시 상이한 프로토콜의 장비를 MES와 연동해야 하나, 공통 매핑 Key 부재로 데이터 붕괴 리스크 직면.</p>
-                    <p><strong>[조치]</strong> 생산기술 부서와 외부 MES 개발 업체 간의 기술적 시각 차이를 해소하기 위해 '3자 실무 협의체'를 직접 주관. 양측 입장을 조율하여 '시간 간격 기반 파싱 매핑 알고리즘' 적용 도출.</p>
-                    <p><strong>[성과]</strong> 기존 인프라 수정 없이 이기종 데이터 실시간 동기화 완수.</p>
-                    <div class="tag-group">
-                        <span class="tag">Protocol Parsing</span>
-                        <span class="tag">Cross-functional PM</span>
-                        <span class="tag">System Integration</span>
-                    </div>
-                </div>
-
-                <!-- Port Tab 4 -->
-                <div id="port-4" class="detail-card right-card">
-                    <h3>🤖 생성형 AI 활용 및 실무 자동화 R&D</h3>
-                    <p><strong>[실무 AI 활용]</strong> ChatGPT, Gemini를 페어 프로그래밍처럼 활용하여 인프라 장애 진단, 방화벽/GPO 점검 항목 도출, MSSQL 쿼리 최적화 및 PowerShell 자동화 스크립트 작성 수행.</p>
-                    <p><strong>[오류 조치 사례]</strong> Excel 복사/붙여넣기 오류 발생 시 증상을 AI에 진단받아 안내된 업데이트 조치 및 Office 롤백을 직접 수행하여 해결.</p>
-                    <p><strong>[미래 확장]</strong> Jupyter Notebook 환경을 통한 이미지 데이터 분류 실습 및 비전 기반 판정 PoC 검토로 제조 DX 역량 확장.</p>
-                    <div class="tag-group">
-                        <span class="tag">Generative AI Ops</span>
-                        <span class="tag">Python / Jupyter</span>
-                        <span class="tag">PowerShell Automation</span>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>👋 Professional Identity & 철학</h3>
+                        <p><strong>"엔지니어링의 본질은 기술의 숙련도가 아닌, 그 기술로 비즈니스의 문제를 어떻게 해결(Solve)하고 가치를 창출(Value)하는가에 있습니다."</strong></p>
+                        <p>• 제조업 사업장 전산 담당자로서 시스템 운영, 인프라 안정화, 현업 사용자 지원을 총괄합니다.</p>
+                        <p>• 단순 유지보수를 넘어 현장의 요구사항과 IT 시스템을 연결하는 <strong>'기술 가교'</strong> 역할을 수행하며, 가시적 성과를 만들어냅니다.</p>
+                        <div class="tag-group">
+                            <span class="tag">System Admin</span>
+                            <span class="tag">MES Operations</span>
+                            <span class="tag">Problem Solver</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- 2. MES & 인프라 운영 -->
+            <div id="sec-infra" class="content-section">
+                <div class="section-header">
+                    <h2>⚙️ MES 및 사내 IT 인프라 통합 관리</h2>
+                </div>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>🛠️ 핵심 운영 범위</h3>
+                        <ul>
+                            <li><strong>MES/SCM 운영:</strong> 생산·품질·재고 등 전 공정 메뉴 운영 및 사용자 지원. 벤더사 대응과 함께 데이터 정합성 유지 총괄.</li>
+                            <li><strong>네트워크 및 방화벽:</strong> L2/L3 스위치, UTM 방화벽, AP, PoE 허브 등 사내 유무선 인프라 유지보수 및 보안 통제.</li>
+                            <li><strong>현장 자동화 HW 제어:</strong> 자동카운터(Zigbee), 바코드 장비, PDA, 자동검사설비 데이터 수집 환경 밀착 관리.</li>
+                            <li><strong>전산 자산 & 지원:</strong> 100대 이상의 단말(PC/OA) 및 서버 자산 관리, 소프트웨어 라이선스 컴플라이언스 준수.</li>
+                        </ul>
+                        <div class="tag-group">
+                            <span class="tag">FortiGate UTM</span>
+                            <span class="tag">Ruckus L3</span>
+                            <span class="tag">MSSQL Server</span>
+                            <span class="tag">HW Troubleshooting</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>📜 자격증 및 스마트공장 행정 역량</h3>
+                        <ul>
+                            <li><strong>국가공인 자격:</strong> 정보처리기사(IT 전반 및 DB 엔지니어링 지식 검증), 한국사능력검정 1급(성실성 및 소양).</li>
+                            <li><strong>스마트공장 고도화 사업 PM:</strong> 도입기업 실무 담당자로서 현장 요구사항 조율, 공급업체 핸들링 및 사업 행정 지원 수행.</li>
+                            <li><strong>사업비 및 회계 감사 대응:</strong> 정부 지원사업의 사업비 사용내역 대조, 증빙자료 수집 및 회계법인 대응.</li>
+                            <li><strong>전사 고정비 절감:</strong> 대기업 상생 협력 지원사업을 유치하여 기숙사 리모델링 및 안전 인프라 확충 기여.</li>
+                        </ul>
+                        <div class="tag-group">
+                            <span class="tag">정보처리기사</span>
+                            <span class="tag">Smart Factory PM</span>
+                            <span class="tag">Audit Compliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Portfolio (핵심 사례 & 트러블슈팅) -->
+            <div id="sec-portfolio" class="content-section">
+                <div class="section-header">
+                    <h2>🚀 Portfolio (핵심 프로젝트 & 트러블슈팅)</h2>
+                </div>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>💻 MES 데이터 무결성 확보 및 SELECT 검증</h3>
+                        <p><strong>[상황]</strong> 생산실적 연도 데이터 입력 오류로 특정 MES 메뉴에서 데이터 조회가 마비되는 시스템 에러 발생.</p>
+                        <p><strong>[조치]</strong> 느린 외부 벤더사 피드백을 기다리지 않고, 직접 관련 시스템 테이블을 추적하여 MSSQL SELECT 쿼리로 데이터를 조회 및 정밀 검증.</p>
+                        <p><strong>[성과]</strong> DB의 직접 수정(Update/Delete) 없이 안전한 조회 및 검증 범위 내에서 문제 데이터를 신속히 특정하여 데이터 무결성을 사수함.</p>
+                        <div class="tag-group">
+                            <span class="tag">MSSQL</span>
+                            <span class="tag">Data Integrity</span>
+                            <span class="tag">SELECT Query Debugging</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🛡️ 전사 네트워크 재설계 및 인프라 체질 개선</h3>
+                        <p><strong>[주차관제 VPN 연동]</strong> A·B 공장 간 VPN 주차관제 연동 시 벤더사 오판을 규명. FortiGate 방화벽 및 Ruckus L3 구조 분석 후 신규 VLAN 세그먼트를 신설하여 타 시스템 간섭 없이 통신 정상화.</p>
+                        <p><strong>[무선 카운터 유선 전환]</strong> Wi-Fi 기반 자동 카운터의 빈번한 끊김과 데이터 누락을 해결하기 위해 현장 물리 계층 점검 후 유선 LAN 망으로 전면 체질 개선하여 가동률 극대화.</p>
+                        <div class="tag-group">
+                            <span class="tag">FortiGate UTM</span>
+                            <span class="tag">Ruckus L3 VLAN</span>
+                            <span class="tag">Physical Layer Redesign</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🤝 3자 실무 협의체 주관: 이기종 장비 연동</h3>
+                        <p><strong>[상황]</strong> 신규 검사공정 추가 시 상이한 프로토콜의 장비를 MES와 연동해야 하나, 공통 매핑 Key 부재로 데이터 붕괴 리스크 직면.</p>
+                        <p><strong>[조치]</strong> 생산기술 부서와 외부 MES 개발 업체 간의 기술적 시각 차이를 해소하기 위해 '3자 실무 협의체'를 직접 주관. 양측 입장을 조율하여 '시간 간격 기반 파싱 매핑 알고리즘' 적용 도출.</p>
+                        <p><strong>[성과]</strong> 기존 인프라 수정 없이 이기종 데이터 실시간 동기화 완수.</p>
+                        <div class="tag-group">
+                            <span class="tag">Protocol Parsing</span>
+                            <span class="tag">Cross-functional PM</span>
+                            <span class="tag">System Integration</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🤖 생성형 AI 활용 및 실무 자동화 R&D</h3>
+                        <p><strong>[실무 AI 활용]</strong> ChatGPT, Gemini를 페어 프로그래밍처럼 활용하여 인프라 장애 진단, 방화벽/GPO 점검 항목 도출, MSSQL 쿼리 최적화 및 PowerShell 자동화 스크립트 작성 수행.</p>
+                        <p><strong>[오류 조치 사례]</strong> Excel 복사/붙여넣기 오류 발생 시 증상을 AI에 진단받아 안내된 업데이트 조치 및 Office 롤백을 직접 수행하여 해결.</p>
+                        <p><strong>[미래 확장]</strong> Jupyter Notebook 환경을 통한 이미지 데이터 분류 실습 및 비전 기반 판정 PoC 검토로 제조 DX 역량 확장.</p>
+                        <div class="tag-group">
+                            <span class="tag">Generative AI Ops</span>
+                            <span class="tag">Python / Jupyter</span>
+                            <span class="tag">PowerShell Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -422,14 +464,14 @@
             window.scrollTo(0, 0);
         }
 
-        function switchTab(side, cardId, btnElement) {
-            const cards = document.querySelectorAll(`.${side}-card`);
-            cards.forEach(card => card.classList.remove('active'));
+        function showSection(sectionId, btnElement) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => sec.classList.remove('active'));
 
-            const buttons = document.querySelectorAll(`.${side}-tab`);
-            buttons.forEach(btn => btn.classList.remove('active'));
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
 
-            document.getElementById(cardId).classList.add('active');
+            document.getElementById(sectionId).classList.add('active');
             btnElement.classList.add('active');
         }
     </script>
