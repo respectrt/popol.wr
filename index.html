@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Infrastructure & Automation Portfolio</title>
+    <title>IT Infrastructure & Workplace Automation Portfolio</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,10 +16,10 @@
             background-color: #0f172a;
             color: #333;
             line-height: 1.6;
-            overflow: hidden; /* 인트로 화면에서는 스크롤 방지 */
+            overflow: hidden;
         }
 
-        /* 공통 화면 전환 컨테이너 */
+        /* 화면 전환 컨테이너 */
         .screen {
             position: absolute;
             top: 0;
@@ -29,7 +29,7 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        /* 1단계: 인트로(표지) 화면 스타일 */
+        /* 1단계: 인트로(표지) 화면 */
         #intro-screen {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             display: flex;
@@ -63,7 +63,7 @@
         #intro-screen p {
             font-size: 1.1rem;
             color: #94a3b8;
-            max-width: 600px;
+            max-width: 650px;
             margin-bottom: 40px;
         }
 
@@ -86,14 +86,13 @@
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
         }
 
-        /* 인트로 화면 숨김 처리 클래스 */
         .screen.hidden {
             opacity: 0;
             pointer-events: none;
             transform: scale(1.05);
         }
 
-        /* 2단계: 본문 메인 컨테이너 (5:5 좌우 분할 + 탭 구조) */
+        /* 2단계: 본문 메인 컨테이너 */
         #main-screen {
             opacity: 0;
             pointer-events: none;
@@ -105,7 +104,7 @@
         #main-screen.active {
             opacity: 1;
             pointer-events: auto;
-            overflow: auto; /* 본문 진입 후엔 스크롤 허용 */
+            overflow: auto;
         }
 
         .panel {
@@ -127,7 +126,7 @@
         }
 
         .panel-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 20px;
             padding-bottom: 10px;
@@ -139,7 +138,6 @@
             border-bottom-color: #2d3748;
         }
 
-        /* 상단 홈으로 가기 버튼 */
         .home-btn {
             display: inline-block;
             margin-bottom: 15px;
@@ -158,7 +156,6 @@
             color: #2d3748;
         }
 
-        /* 중분류 탭 메뉴 */
         .tab-menu {
             display: flex;
             gap: 8px;
@@ -190,7 +187,6 @@
             border-color: #2d3748;
         }
 
-        /* 상세 데이터 카드 컨테이너 */
         .content-area {
             flex: 1;
         }
@@ -220,9 +216,9 @@
         }
 
         .detail-card p {
-            font-size: 0.93rem;
+            font-size: 0.92rem;
             color: #4a5568;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .tag-group {
@@ -246,25 +242,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 모바일 반응형 구조 */
         @media (max-width: 768px) {
-            body {
-                overflow: auto;
-            }
-            #main-screen {
-                height: auto;
-            }
-            .panel {
-                height: auto;
-                padding: 20px;
-            }
-            .left-panel {
-                border-right: none;
-                border-bottom: 2px solid #e2e8f0;
-            }
-            #intro-screen h1 {
-                font-size: 2rem;
-            }
+            body { overflow: auto; }
+            #main-screen { height: auto; }
+            .panel { height: auto; padding: 20px; }
+            .left-panel { border-right: none; border-bottom: 2px solid #e2e8f0; }
+            #intro-screen h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -272,99 +255,104 @@
 
     <!-- [1단계] 인트로 표지 화면 -->
     <div id="intro-screen" class="screen">
-        <span class="intro-badge">Professional Portfolio</span>
+        <span class="intro-badge">Engineering & Operations</span>
         <h1>IT Infrastructure & Automation</h1>
-        <p>시스템 안정성 방어부터 Python 기반 업무 자동화 설계까지, <br>1인 전산 현장의 실무 역량을 담은 포트폴리오입니다.</p>
+        <p>1인 전산 환경에서의 단말·인프라 유지보수 방어부터<br>스크립트 기반 자산 관리 자동화까지의 실무 기록입니다.</p>
         <button class="enter-btn" onclick="enterPortfolio()">포트폴리오 입장하기 ➔</button>
     </div>
 
-    <!-- [2단계] 본문 메인 화면 (좌우 5:5 분할 + 탭 구조) -->
+    <!-- [2단계] 본문 메인 화면 (좌우 듀얼 패널) -->
     <div id="main-screen" class="screen">
 
-        <!-- [좌측 영역] 일반 이력 (General) -->
+        <!-- [좌측 영역] General (운영/경력 역량) -->
         <div class="panel left-panel">
             <button class="home-btn" onclick="goToIntro()">↺ 표지로 돌아가기</button>
-            <div class="panel-title">📋 General (이력 및 기본스펙)</div>
+            <div class="panel-title">📋 General (운영 및 스펙)</div>
 
             <div class="tab-menu">
-                <button class="tab-btn left-tab active" onclick="switchTab('left', 'gen-1', this)">인사말 & 역량</button>
-                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-2', this)">자격증 & 스펙</button>
-                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-3', this)">경력 기술서</button>
+                <button class="tab-btn left-tab active" onclick="switchTab('left', 'gen-1', this)">인사말 & 철학</button>
+                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-2', this)">단말 온보딩/HW</button>
+                <button class="tab-btn left-tab" onclick="switchTab('left', 'gen-3', this)">자격 및 컴플라이언스</button>
             </div>
 
             <div class="content-area">
                 <div id="gen-1" class="detail-card left-card active">
-                    <h3>👋 1인 전산 인프라 & 개발 융합형 인재</h3>
-                    <p>사내 모든 네트워크, 방화벽, 서버 시스템을 전담 관리하는 1인 전산 관리자로서, 현장 인프라의 안정적 방어와 파이썬 기반 업무 자동화를 동시에 수행해 온 커리어를 소개합니다.</p>
+                    <h3>👋 1인 전산 인프라 & 자동화 엔지니어</h3>
+                    <p>• 사내 인프라 및 전단 단말(PC, 모니터, 현장 프린터) 유지보수를 독자 수행하며 비즈니스 연속성을 방어합니다.</p>
+                    <p>• 단순히 발생한 장애를 조치하는 것을 넘어, 반복되는 현업 장애를 스크립트와 프로세스로 자동화하는 엔지니어링 접근을 지향합니다.</p>
                     <div class="tag-group">
                         <span class="tag">System Admin</span>
-                        <span class="tag">Automation</span>
+                        <span class="tag">Workplace Operations</span>
                     </div>
                 </div>
 
                 <div id="gen-2" class="detail-card left-card">
-                    <h3>📜 보유 자격 및 검증된 스펙</h3>
-                    <p>• <strong>정보처리기사:</strong> 공채 서류 검증 방어용 필수 자격</p>
-                    <p>• <strong>한국사능력검정 1급:</strong> 대기업 지원 기본 스펙 필터링 완전 충족</p>
+                    <h3>🛠️ 단말 라이프사이클 & 현장 트러블슈팅</h3>
+                    <p>• <strong>도입 및 온보딩:</strong> PC 조달 기안 검토부터 OS/Office/MES/그룹웨어/NAS/IP 설정까지 독자 수행.</p>
+                    <p>• <strong>HW 포트 디버깅:</strong> 본체 RAM/쿨러 교체, 케이블(HDMI/DP/DVI/VGA) 단자 및 현장 포트 레벨 디버깅을 통한 장애 1차 판정.</p>
+                    <p>• <strong>제조 현장 대응:</strong> 유분 및 물리적 간섭이 많은 공장 환경 내 프린터(ML 계열 등) 및 단말 환경 결함 즉각 대응.</p>
                     <div class="tag-group">
-                        <span class="tag">Certified</span>
-                        <span class="tag">Qualification</span>
+                        <span class="tag">Provisioning</span>
+                        <span class="tag">Physical Layer Debugging</span>
                     </div>
                 </div>
 
                 <div id="gen-3" class="detail-card left-card">
-                    <h3>💼 1인 전산 주요 경력 세부 요약</h3>
-                    <p>• 기업망 L3, 방화벽 규칙 구성, VPN 터널링, AP 유지보수 총괄</p>
-                    <p>• 사내 IT 자산 리스크 관리 및 외부 유지보수 벤더사 소통 담당</p>
+                    <h3>📜 보유 자격 및 라이선스 관리</h3>
+                    <p>• <strong>정보처리기사:</strong> IT 전반의 시스템 및 데이터베이스 엔지니어링 지식 보유 검증.</p>
+                    <p>• <strong>한국사능력검정 1급:</strong> 성실성 및 기본 자격 요건 충족.</p>
+                    <p>• <strong>라이선스 컴플라이언스:</strong> 사내 OEM/MAK 수량 정합성 추적 및 외부 감사(Audit) 리스크 사전 방어.</p>
                     <div class="tag-group">
-                        <span class="tag">Network Core</span>
-                        <span class="tag">Vendor Management</span>
+                        <span class="tag">Engineer Cert</span>
+                        <span class="tag">Software Compliance</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- [우측 영역] 실전 포트폴리오 (Portfolio) -->
+        <!-- [우측 영역] Portfolio (자동화 & 프로젝트) -->
         <div class="panel right-panel">
-            <div style="height: 27px; margin-bottom: 15px;"><!-- 좌측 홈 버튼과 높이 맞춤용 여백 --></div>
-            <div class="panel-title">🚀 Portfolio (트러블슈팅 & 개발)</div>
+            <div style="height: 27px; margin-bottom: 15px;"></div>
+            <div class="panel-title">🚀 Portfolio (자동화 & 사례)</div>
 
             <div class="tab-menu">
-                <button class="tab-btn right-tab active" onclick="switchTab('right', 'port-1', this)">네트워크/방화벽</button>
-                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-2', this)">Python 자동화</button>
-                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-3', this)">IT 자산/MES</button>
+                <button class="tab-btn right-tab active" onclick="switchTab('right', 'port-1', this)">BAT 라이선스 스캔</button>
+                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-2', this)">네트워크/VPN 사례</button>
+                <button class="tab-btn right-tab" onclick="switchTab('right', 'port-3', this)">Python 알럿/비전 PoC</button>
             </div>
 
             <div class="content-area">
                 <div id="port-1" class="detail-card right-card active">
-                    <h3>🛡️ 본사-지사 간 방화벽 & VPN 터널링 재설계</h3>
-                    <p><strong>[문제]</strong> 지사 데이터 통신 중 세션 단절 및 인바운드 병목 현상 발생</p>
-                    <p><strong>[해결]</strong> L3 스위치 라우팅 테이블 및 VPN IPsec 터널링을 재구성하여 패킷 손실율 최소화 및 안정화 달성</p>
+                    <h3>💻 BAT 스크립트 기반 라이선스 자동 진단</h3>
+                    <p><strong>[배경]</strong> AD(Active Directory) 중앙 관리 인프라의 부재로 사내 라이선스 가시성 확보 난항.</p>
+                    <p><strong>[조치]</strong> CLI 기반 BAT 배치파일 스크립트를 자체 제작하여 전사 PC의 OS/Office 정품 상태(OEM, MAK, TRL) 및 키 정보를 원클릭 자동 스캔.</p>
+                    <p><strong>[성과]</strong> 현장 전수조사 시간을 대폭 단축하고, 소프트웨어 컴플라이언스 감사 리스크를 선제적으로 차단.</p>
                     <div class="tag-group">
-                        <span class="tag">Firewall</span>
-                        <span class="tag">VPN Tunnel</span>
-                        <span class="tag">L3 Switch</span>
+                        <span class="tag">Batch Script (BAT)</span>
+                        <span class="tag">License Audit</span>
+                        <span class="tag">AD Bypass</span>
                     </div>
                 </div>
 
                 <div id="port-2" class="detail-card right-card">
-                    <h3>🐍 파이썬 듀얼패널 통신 & 비동기 알럿 프로그램</h3>
-                    <p><strong>[개요]</strong> 현장 모니터링 데이터의 오차 범위(±0.05) 수동 검수를 자동화하기 위한 툴 개발</p>
-                    <p><strong>[성과]</strong> 데이터 실시간 통신 및 비동기 알럿을 적용해 이상 발생 시 즉시 대응 프로세스 확립</p>
+                    <h3>🛡️ 주차관제 & 공장 간 VPN 라우팅 통합</h3>
+                    <p><strong>[상황]</strong> FortiGate 및 Ruckus L3 기반 인프라에서 공장 간 주차관제 연동 요구 발생.</p>
+                    <p><strong>[해결]</strong> 벤더사 오판을 규명하고 L3 내 신규 VLAN 세그먼트를 분리 신설하여 타 시스템 간섭 없이 VPN 터널링 통합 완료.</p>
                     <div class="tag-group">
-                        <span class="tag">Python</span>
-                        <span class="tag">API</span>
-                        <span class="tag">Async Alert</span>
+                        <span class="tag">FortiGate</span>
+                        <span class="tag">Ruckus L3</span>
+                        <span class="tag">VLAN Routing</span>
                     </div>
                 </div>
 
                 <div id="port-3" class="detail-card right-card">
-                    <h3>📂 사내 전산 자산 및 MES 연동 툴 구축</h3>
-                    <p><strong>[개요]</strong> 파편화된 사내 전산 HW/SW 자산을 데이터화하여 체계적으로 추적 관리</p>
-                    <p><strong>[성과]</strong> 기업 라이선스 정품 준수 리스크 차단 및 1인 전산 자산 관리 이력 투명화</p>
+                    <h3>🐍 Python 듀얼패널 알럿 & 비전 PoC</h3>
+                    <p><strong>[자동화]</strong> 데이터 오차 범위(±0.05) 수동 검수를 방지하기 위한 파이썬 기반 비동기 알럿 프로그램 개발.</p>
+                    <p><strong>[R&D]</strong> Jupyter Notebook 환경에서 비전 데이터 기반 합부 판정 알고리즘 테스트 및 IoT 확장 시나리오 검토.</p>
                     <div class="tag-group">
-                        <span class="tag">Asset Management</span>
-                        <span class="tag">System Control</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Async Alert</span>
+                        <span class="tag">Vision PoC</span>
                     </div>
                 </div>
             </div>
@@ -372,16 +360,13 @@
 
     </div>
 
-    <!-- 화면 전환 및 탭 제어 자바스크립트 -->
     <script>
-        // 인트로 표지 -> 5:5 본문 화면으로 전환
         function enterPortfolio() {
             document.getElementById('intro-screen').classList.add('hidden');
             document.getElementById('main-screen').classList.add('active');
             document.body.style.overflow = 'auto';
         }
 
-        // 5:5 본문 화면 -> 인트로 표지로 복귀
         function goToIntro() {
             document.getElementById('main-screen').classList.remove('active');
             document.getElementById('intro-screen').classList.remove('hidden');
@@ -389,7 +374,6 @@
             window.scrollTo(0, 0);
         }
 
-        // 좌우 패널 내부 탭 전환 로직
         function switchTab(side, cardId, btnElement) {
             const cards = document.querySelectorAll(`.${side}-card`);
             cards.forEach(card => card.classList.remove('active'));
