@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -346,6 +345,11 @@
                 font-size: 0.75rem;
             }
 
+            /* 데스크톱 전용 보조 영역은 모바일 화면에 노출하지 않음 */
+            .sidebar-utility {
+                display: none;
+            }
+
             /* 모바일 가로형 탭 */
             .nav-menu {
                 display: none;
@@ -469,6 +473,517 @@
             }
         }
 
+        /* 데스크톱 화면 개선: 기존 콘텐츠와 모바일 레이아웃은 유지 */
+        @media (min-width: 901px) {
+            .sidebar {
+                width: 310px;
+                min-width: 310px;
+                padding: 30px 26px;
+            }
+
+            .sidebar-header {
+                margin-bottom: 38px;
+                padding-bottom: 20px;
+            }
+
+            .sidebar-header h2 {
+                font-size: 1.32rem;
+                line-height: 1.4;
+            }
+
+            .sidebar-header p {
+                font-size: 0.86rem;
+                line-height: 1.6;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-item {
+                padding: 19px 20px;
+                border-radius: 10px;
+            }
+
+            .nav-item .title {
+                font-size: 1.1rem;
+                line-height: 1.45;
+            }
+
+            .nav-item .desc {
+                font-size: 0.84rem;
+                line-height: 1.55;
+                margin-top: 7px;
+            }
+
+            .home-btn {
+                padding: 13px 12px;
+                font-size: 0.9rem;
+                border: 1px solid #475569;
+            }
+
+            .content-display {
+                padding: clamp(34px, 3.2vw, 58px);
+            }
+
+            .section-header {
+                margin-bottom: 30px;
+                padding-bottom: 17px;
+            }
+
+            .section-header h2 {
+                font-size: clamp(1.75rem, 2vw, 2.05rem);
+                line-height: 1.4;
+            }
+
+            .card-grid {
+                gap: 24px;
+            }
+
+            .info-card {
+                padding: 30px;
+                border-radius: 14px;
+                box-shadow: 0 5px 16px rgba(15, 23, 42, 0.055);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .info-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(15, 23, 42, 0.09);
+            }
+
+            .info-card h3 {
+                font-size: 1.25rem;
+                line-height: 1.45;
+                margin-bottom: 17px;
+            }
+
+            .info-card p,
+            .info-card li {
+                font-size: 0.98rem;
+                line-height: 1.78;
+                margin-bottom: 13px;
+            }
+
+            .info-card ul {
+                padding-left: 22px;
+            }
+
+            .tag-group {
+                gap: 8px;
+                margin-top: 20px;
+            }
+
+            .tag {
+                font-size: 0.8rem;
+                padding: 6px 11px;
+                border-radius: 7px;
+            }
+        }
+
+        /* 넓은 데스크톱에서 카드 2열 구성 */
+        @media (min-width: 1280px) {
+            .card-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                align-items: stretch;
+            }
+
+            .info-card {
+                min-width: 0;
+            }
+        }
+
+        /* 큰 모니터에서는 본문 가독성과 여백을 한 단계 더 확보 */
+        @media (min-width: 1600px) {
+            .sidebar {
+                width: 330px;
+                min-width: 330px;
+                padding: 34px 28px;
+            }
+
+            .content-display {
+                padding: 58px 64px;
+            }
+
+            .card-grid {
+                gap: 28px;
+            }
+
+            .info-card {
+                padding: 34px;
+            }
+
+            .info-card p,
+            .info-card li {
+                font-size: 1rem;
+            }
+        }
+
+        /* 데스크톱 내비게이션과 콘텐츠의 시각적 위계 정리 */
+        @media (min-width: 901px) {
+            .sidebar {
+                position: relative;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #475569 transparent;
+                background:
+                    radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.10), transparent 30%),
+                    linear-gradient(180deg, #17263b 0%, #1e293b 58%, #17263b 100%);
+            }
+
+            .sidebar-header {
+                position: relative;
+                margin-bottom: 28px;
+                padding: 4px 0 22px 14px;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+            }
+
+            .sidebar-header::before {
+                content: "PORTFOLIO / 2026";
+                display: block;
+                margin-bottom: 10px;
+                color: #7dd3fc;
+                font-size: 0.68rem;
+                font-weight: 800;
+                letter-spacing: 0.16em;
+            }
+
+            .sidebar-header::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 5px;
+                width: 3px;
+                height: 54px;
+                border-radius: 3px;
+                background: linear-gradient(180deg, #38bdf8, #2563eb);
+            }
+
+            .sidebar-header h2 {
+                color: #f8fafc;
+                letter-spacing: -0.035em;
+            }
+
+            .sidebar-header p {
+                color: #a9b8ca;
+            }
+
+            .nav-menu {
+                flex: 0 0 auto;
+                gap: 12px;
+            }
+
+            .nav-item {
+                position: relative;
+                min-height: 88px;
+                padding: 18px 17px;
+                border: 1px solid rgba(148, 163, 184, 0.16);
+                border-radius: 12px;
+                background: rgba(51, 65, 85, 0.58);
+                box-shadow: 0 5px 14px rgba(2, 6, 23, 0.08);
+            }
+
+            .nav-item .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                font-size: 1.02rem;
+                letter-spacing: -0.025em;
+            }
+
+            .nav-item:nth-child(1) .title::after { content: "01"; }
+            .nav-item:nth-child(2) .title::after { content: "02"; }
+            .nav-item:nth-child(3) .title::after { content: "03"; }
+
+            .nav-item .title::after {
+                flex: 0 0 auto;
+                color: #94a3b8;
+                font-size: 0.7rem;
+                font-weight: 800;
+                letter-spacing: 0.12em;
+            }
+
+            .nav-item .desc {
+                padding-right: 22px;
+                color: #aebdce;
+            }
+
+            .nav-item:hover {
+                border-color: rgba(125, 211, 252, 0.42);
+                background: rgba(71, 85, 105, 0.8);
+                transform: translateX(3px);
+            }
+
+            .nav-item.active {
+                border-color: rgba(96, 165, 250, 0.8);
+                background: linear-gradient(120deg, #2563eb 0%, #1d4ed8 100%);
+                box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
+            }
+
+            .nav-item.active .title::after {
+                color: #dbeafe;
+            }
+
+            .sidebar-utility {
+                display: flex;
+                flex: 1 0 auto;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 22px;
+                min-height: 230px;
+                margin-top: 30px;
+                padding: 22px 2px 20px;
+                border-top: 1px solid rgba(148, 163, 184, 0.2);
+            }
+
+            .sidebar-kicker {
+                display: block;
+                margin-bottom: 8px;
+                color: #7dd3fc;
+                font-size: 0.66rem;
+                font-weight: 800;
+                letter-spacing: 0.16em;
+            }
+
+            .sidebar-utility h3 {
+                color: #f1f5f9;
+                font-size: 0.98rem;
+                font-weight: 750;
+            }
+
+            .sidebar-utility p {
+                margin-top: 5px;
+                color: #a9b8ca;
+                font-size: 0.76rem;
+                line-height: 1.55;
+                word-break: keep-all;
+            }
+
+            .sidebar-capabilities {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 7px;
+                margin-top: 16px;
+            }
+
+            .sidebar-capabilities span {
+                display: flex;
+                align-items: center;
+                min-height: 34px;
+                padding: 7px 9px;
+                border: 1px solid rgba(148, 163, 184, 0.18);
+                border-radius: 7px;
+                background: rgba(15, 23, 42, 0.24);
+                color: #dbeafe;
+                font-size: 0.7rem;
+                font-weight: 650;
+                line-height: 1.35;
+            }
+
+            .sidebar-note {
+                display: flex;
+                align-items: center;
+                gap: 11px;
+                padding: 13px 12px;
+                border: 1px solid rgba(148, 163, 184, 0.16);
+                border-radius: 10px;
+                background: rgba(15, 23, 42, 0.28);
+            }
+
+            .sidebar-note-mark {
+                display: grid;
+                width: 34px;
+                height: 34px;
+                place-items: center;
+                border-radius: 9px;
+                background: rgba(56, 189, 248, 0.14);
+                color: #7dd3fc;
+                font-size: 0.78rem;
+                font-weight: 850;
+                letter-spacing: 0.04em;
+            }
+
+            .sidebar-note strong,
+            .sidebar-note small {
+                display: block;
+            }
+
+            .sidebar-note strong {
+                color: #e2e8f0;
+                font-size: 0.75rem;
+            }
+
+            .sidebar-note small {
+                margin-top: 2px;
+                color: #94a3b8;
+                font-size: 0.64rem;
+            }
+
+            .home-btn {
+                flex: 0 0 auto;
+                margin-top: 16px;
+                padding: 13px 14px;
+                border: 1px solid rgba(148, 163, 184, 0.22);
+                border-radius: 9px;
+                background: rgba(51, 65, 85, 0.52);
+                color: #cbd5e1;
+            }
+
+            .content-display {
+                background:
+                    radial-gradient(circle at 96% 2%, rgba(219, 234, 254, 0.55), transparent 26%),
+                    #f4f7fb;
+                padding: clamp(38px, 4vw, 66px);
+            }
+
+            .content-section {
+                width: 100%;
+                max-width: 1560px;
+                margin: 0 auto;
+            }
+
+            .section-header {
+                position: relative;
+                margin-bottom: 30px;
+                padding: 0 0 20px 18px;
+                border-bottom: 1px solid #dbe3ee;
+            }
+
+            .section-header::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 5px;
+                width: 4px;
+                height: 34px;
+                border-radius: 4px;
+                background: linear-gradient(180deg, #38bdf8, #2563eb);
+            }
+
+            .section-header h2 {
+                color: #14243a;
+                font-size: clamp(1.75rem, 2vw, 2.15rem);
+                letter-spacing: -0.045em;
+            }
+
+            .card-grid {
+                gap: 20px;
+                align-items: stretch;
+            }
+
+            .info-card {
+                position: relative;
+                overflow: hidden;
+                border: 1px solid #e1e8f0;
+                border-radius: 13px;
+                background: rgba(255, 255, 255, 0.96);
+                box-shadow: 0 3px 12px rgba(15, 23, 42, 0.035);
+                padding: 27px 29px 25px;
+            }
+
+            .info-card::before {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 0;
+                width: 3px;
+                background: linear-gradient(180deg, #60a5fa, #bfdbfe);
+                opacity: 0.85;
+            }
+
+            .info-card:hover {
+                border-color: #cbd9eb;
+                box-shadow: 0 10px 24px rgba(15, 23, 42, 0.065);
+                transform: translateY(-2px);
+            }
+
+            .info-card h3 {
+                margin-bottom: 15px;
+                color: #1e3a5f;
+                font-size: 1.13rem;
+                letter-spacing: -0.025em;
+            }
+
+            .info-card p,
+            .info-card li {
+                color: #526174;
+                font-size: 0.94rem;
+                line-height: 1.78;
+            }
+
+            .info-card strong {
+                color: #263b55;
+                font-weight: 750;
+            }
+
+            .info-card ul {
+                padding-left: 19px;
+            }
+
+            .info-card li::marker {
+                color: #60a5fa;
+            }
+
+            .tag-group {
+                gap: 7px;
+                margin-top: 18px;
+                padding-top: 15px;
+                border-top: 1px solid #edf1f6;
+            }
+
+            .tag {
+                border: 1px solid #e1eaf5;
+                background: #f4f8fd;
+                color: #52708f;
+                font-size: 0.7rem;
+                font-weight: 650;
+                padding: 5px 9px;
+            }
+        }
+
+        /* 중간 폭에서는 한 열로 읽기 흐름을 유지하고, 넓은 화면에서만 2열 */
+        @media (min-width: 901px) and (max-width: 1199px) {
+            .sidebar {
+                width: 286px;
+                min-width: 286px;
+                padding: 25px 20px;
+            }
+
+            .content-display {
+                padding: 34px 30px;
+            }
+
+            .sidebar-utility {
+                min-height: 205px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .card-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .sidebar {
+                width: 332px;
+                min-width: 332px;
+                padding: 34px 28px;
+            }
+
+            .content-display {
+                padding: 58px 64px;
+            }
+
+            .card-grid {
+                gap: 24px;
+            }
+
+            .info-card {
+                padding: 31px 33px 29px;
+            }
+        }
+
         /* 키보드 접근성 */
         button:focus-visible {
             outline: 3px solid #38bdf8;
@@ -546,6 +1061,28 @@
                     <span class="title">🚀 Portfolio (주요 사례)</span>
                     <span class="desc">문제 해결, 협업 및 개인 기술 실습</span>
                 </button>
+            </div>
+
+            <!-- 데스크톱 전용 사이드바 보조 영역: 기존 포트폴리오의 운영 분야를 재배치 -->
+            <div class="sidebar-utility" aria-label="주요 운영 분야">
+                <div class="sidebar-utility-block">
+                    <span class="sidebar-kicker">CORE AREAS</span>
+                    <h3>주요 운영 분야</h3>
+                    <p>시스템과 네트워크부터 사용자 업무 환경까지</p>
+                    <div class="sidebar-capabilities">
+                        <span>MES · SCM</span>
+                        <span>Network</span>
+                        <span>NAS · IT Asset</span>
+                        <span>SQL · Data</span>
+                    </div>
+                </div>
+                <div class="sidebar-note">
+                    <span class="sidebar-note-mark">IT</span>
+                    <div>
+                        <strong>Manufacturing IT</strong>
+                        <small>Infrastructure & Operations</small>
+                    </div>
+                </div>
             </div>
 
             <!-- 모바일 가로형 메뉴 -->
